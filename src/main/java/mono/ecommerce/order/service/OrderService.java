@@ -21,4 +21,8 @@ public class OrderService {
     public List<OrderDto> findByUserId(Long userId) {
         return orderRepository.findByUserId(userId).stream().map(Order::toDto).toList();
     }
+
+    public OrderDto findById(Long userId, Long orderId) {
+        return orderRepository.findByIdAndUserId(orderId, userId).orElseThrow(() -> new IllegalArgumentException("order not found")).toDto();
+    }
 }

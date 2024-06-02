@@ -3,9 +3,7 @@ package mono.ecommerce.order.controller;
 import mono.ecommerce.order.service.OrderService;
 import mono.ecommerce.security.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -22,5 +20,10 @@ public class OrderController {
     @GetMapping
     public List<OrderDto> findByUserId(@AuthenticationPrincipal UserDetailsImpl userDetails) {
         return orderService.findByUserId(userDetails.getId());
+    }
+
+    @GetMapping("/{orderId}")
+    public OrderDto findById(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable("orderId") Long orderId) {
+        return orderService.findById(userDetails.getId(), orderId);
     }
 }
