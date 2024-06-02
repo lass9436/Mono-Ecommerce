@@ -10,11 +10,13 @@ import java.util.List;
 
 public class UserDetailsImpl implements UserDetails {
 
+    private final Long id;
     private final String username;
     private final String password;
     private final Collection<SimpleGrantedAuthority> authorities;
 
-    public UserDetailsImpl(String username, String password, List<String> authorities) {
+    public UserDetailsImpl(Long id, String username, String password, List<String> authorities) {
+        this.id = id;
         this.username = username;
         this.password = password;
         this.authorities = new ArrayList<>();
@@ -34,5 +36,9 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getUsername() {
         return username;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
