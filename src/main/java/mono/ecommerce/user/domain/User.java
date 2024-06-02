@@ -21,11 +21,13 @@ public class User {
     @Column(nullable = false)
     private String nickname;
     private String role;
+    private Long point;
 
     public User(SignRequest signRequest) {
         this.username = signRequest.getUsername();
         this.password = signRequest.getPassword();
         this.nickname = signRequest.getNickname();
+        this.point = 0L;
         this.role = "USER";
     }
 }
