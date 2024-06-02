@@ -37,7 +37,7 @@ public class SecurityConfig{
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/login", "/logout").permitAll()
                         .requestMatchers("/item/**").permitAll()
-                        .requestMatchers("/user/**").hasRole("USER")
+                        .requestMatchers("/user/**", "/favorite/**").hasRole("USER")
                         .anyRequest().permitAll();
             })
             .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService, redisService), UsernamePasswordAuthenticationFilter.class);
