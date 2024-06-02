@@ -1,6 +1,9 @@
 package mono.ecommerce.security;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import mono.ecommerce.user.domain.User;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -9,15 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.Optional;
 
 @RestController
+@RequiredArgsConstructor
+@Slf4j
 public class AuthController {
 
     private final UserDetailServiceImpl userDetailService;
     private final JwtTokenProvider jwtTokenProvider;
-
-    public AuthController(UserDetailServiceImpl userDetailService, JwtTokenProvider jwtTokenProvider) {
-        this.userDetailService = userDetailService;
-        this.jwtTokenProvider = jwtTokenProvider;
-    }
+    private final RedisService redisService;
 
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
@@ -25,6 +26,14 @@ public class AuthController {
         final String token = jwtTokenProvider.createToken(user.getUsername(), user.getRole());
         response.setHeader("Authorization", "Bearer " + token);
         return "Login successful";
+    }
+
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request) {
+        String token = jwtTokenProvider.resolveToken(request);
+        log.info(token);
+        redisService.addLogoutList(token);
+        return "Logout successful";
     }
 
     @PostMapping("/sign")
