@@ -6,3 +6,29 @@ CREATE TABLE users (
     username VARCHAR(255),
     point BIGINT
 );
+
+CREATE TABLE item (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    price BIGINT NOT NULL,
+    quantity BIGINT NOT NULL
+);
+
+CREATE TABLE orders (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_date TIMESTAMP NOT NULL,
+    status VARCHAR(50) NOT NULL,
+    user_id BIGINT NOT NULL,
+    CONSTRAINT chk_status CHECK (status IN ('ORDERED', 'SHIPPING', 'DELIVERED')),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+);
+
+CREATE TABLE order_item (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    order_id BIGINT NOT NULL,
+    item_id BIGINT NOT NULL,
+    quantity BIGINT NOT NULL,
+    total_price BIGINT NOT NULL,
+    FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
+    FOREIGN KEY (item_id) REFERENCES item(id) ON DELETE CASCADE
+);
