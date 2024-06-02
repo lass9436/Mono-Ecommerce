@@ -1,8 +1,9 @@
+-- 유저 데이터 추가
 INSERT INTO users (username, password, nickname, role, point)
 VALUES ('username1', '$2a$10$..k52ypcmQn/bFasGMmiWe3Cvi/Hk.Tl7C.4Adi72/HT3jkQYOfR6', 'nickname1', 'USER', 100000),
        ('username2', '$2a$10$o3TkcPkjyzAzOnNAFCnGc.zuluHL91zX9ekE4ZWuKQmQirp2iR31q', 'nickname2', 'USER', 50000),
        ('username3', '$2a$10$aYr10cgx6sQAmGj4GGdo.OISDYc2g7EqU8FtdmMJKDQlqd1.ZFCPO', 'nickname3', 'USER', 25000);
-
+-- 상품 데이터 추가
 INSERT INTO item (name, price, quantity)
 VALUES ('Item 1', 1000, 10),
        ('Item 2', 1500, 20),
@@ -32,5 +33,13 @@ INSERT INTO order_item (order_id, item_id, quantity, total_price) VALUES
     (3, 7, 3, 12000),
     (3, 8, 2, 9000),
     (3, 9, 1, 5000);
+
+-- 페이버릿 예시 데이터 추가
+INSERT INTO favorite (user_id, item_id) VALUES
+    (1, 4),   -- 사용자 1이 아이템 4를 즐겨찾기함
+    (1, 7),   -- 사용자 1이 아이템 7을 즐겨찾기함
+    (2, 2),   -- 사용자 2가 아이템 2를 즐겨찾기함
+    (2, 5);   -- 사용자 2가 아이템 5를 즐겨찾기함
+
 
 

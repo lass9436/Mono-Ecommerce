@@ -32,3 +32,11 @@ CREATE TABLE order_item (
     FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
     FOREIGN KEY (item_id) REFERENCES item(id) ON DELETE CASCADE
 );
+
+CREATE TABLE favorite (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    user_id BIGINT NOT NULL,
+    item_id BIGINT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES users(id),
+    FOREIGN KEY (item_id) REFERENCES item(id)
+);
