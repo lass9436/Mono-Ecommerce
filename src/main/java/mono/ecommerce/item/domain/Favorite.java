@@ -27,4 +27,9 @@ public class Favorite {
     public FavoriteDto toDto(){
         return new FavoriteDto(item.getName(), item.getPrice(), item.getQuantity());
     }
+
+    public Favorite (User user, Item item) {
+        this.user = user;
+        this.item = item;
+    }
 }
