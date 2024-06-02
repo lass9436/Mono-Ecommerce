@@ -19,7 +19,7 @@ CREATE TABLE orders (
     order_date TIMESTAMP NOT NULL,
     status VARCHAR(50) NOT NULL,
     user_id BIGINT NOT NULL,
-    CONSTRAINT chk_status CHECK (status IN ('ORDERED', 'SHIPPING', 'DELIVERED')),
+    CONSTRAINT chk_status CHECK (status IN ('ORDERED', 'SHIPPING', 'DELIVERED', 'RETURNED')),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
