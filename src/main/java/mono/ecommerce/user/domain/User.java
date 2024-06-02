@@ -30,4 +30,8 @@ public class User {
         this.point = 0L;
         this.role = "USER";
     }
+
+    public void charge(Long point) {
+        this.point += point;
+    }
 }
