@@ -8,17 +8,18 @@ import org.springframework.security.config.annotation.web.configurers.HeadersCon
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.header.writers.frameoptions.XFrameOptionsHeaderWriter;
 
 @Configuration
 public class SecurityConfig{
 
     private final JwtTokenProvider jwtTokenProvider;
     private final UserDetailsService userDetailsService;
+    private final RedisService redisService;
 
-    public SecurityConfig(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService) {
+    public SecurityConfig(JwtTokenProvider jwtTokenProvider, UserDetailsService userDetailsService, RedisService redisService) {
         this.jwtTokenProvider = jwtTokenProvider;
         this.userDetailsService = userDetailsService;
+        this.redisService = redisService;
     }
 
     @Bean
@@ -30,6 +31,7 @@ public class SecurityConfig{
             .formLogin(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(AbstractHttpConfigurer::disable)
+            .logout(AbstractHttpConfigurer::disable)
             .authorizeHttpRequests(request -> {
                 request
                         .requestMatchers("/h2-console/**").permitAll()
@@ -37,7 +39,7 @@ public class SecurityConfig{
                         .requestMatchers("/user/**").hasRole("USER")
                         .anyRequest().permitAll();
             })
-            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService), UsernamePasswordAuthenticationFilter.class);
+            .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService, redisService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
 
