@@ -1,7 +1,9 @@
 package mono.ecommerce.order.service;
 
 import mono.ecommerce.order.controller.OrderDto;
+import mono.ecommerce.order.controller.OrderUpdate;
 import mono.ecommerce.order.domain.Order;
+import mono.ecommerce.order.domain.OrderStatus;
 import mono.ecommerce.order.repository.OrderRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,5 +26,13 @@ public class OrderService {
 
     public OrderDto findById(Long userId, Long orderId) {
         return orderRepository.findByIdAndUserId(orderId, userId).orElseThrow(() -> new IllegalArgumentException("order not found")).toDto();
+    }
+
+    @Transactional
+    public OrderDto updateOrderStatus(Long userId, Long orderId, OrderUpdate orderUpdate) {
+        OrderStatus orderStatus = orderUpdate.getOrderStatus();
+        final Order order = orderRepository.findByIdAndUserId(orderId, userId).orElseThrow(() -> new IllegalArgumentException("order not found"));
+        order.updateStatus(orderStatus);
+        return order.toDto();
     }
 }

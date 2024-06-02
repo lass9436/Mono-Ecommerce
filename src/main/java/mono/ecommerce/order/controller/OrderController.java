@@ -1,5 +1,6 @@
 package mono.ecommerce.order.controller;
 
+import mono.ecommerce.order.domain.OrderStatus;
 import mono.ecommerce.order.service.OrderService;
 import mono.ecommerce.security.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -25,5 +26,10 @@ public class OrderController {
     @GetMapping("/{orderId}")
     public OrderDto findById(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable("orderId") Long orderId) {
         return orderService.findById(userDetails.getId(), orderId);
+    }
+
+    @PatchMapping("/{orderId}")
+    public OrderDto updateOrderStatus(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable("orderId") Long orderId, @RequestBody OrderUpdate orderUpdate) {
+        return orderService.updateOrderStatus(userDetails.getId(), orderId, orderUpdate);
     }
 }
