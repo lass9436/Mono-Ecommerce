@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mono.ecommerce.item.controller.ItemDto;
 
 @Entity
 @Getter
@@ -22,4 +23,8 @@ public class Item {
 
     @Column(nullable = false)
     private Long quantity;
+
+    public ItemDto toDto(){
+        return new ItemDto(name, price, quantity);
+    }
 }
