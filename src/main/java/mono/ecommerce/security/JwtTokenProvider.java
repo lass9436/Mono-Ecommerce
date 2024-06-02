@@ -18,8 +18,10 @@ public class JwtTokenProvider {
     private long tokenValidityMilliseconds;
     private Algorithm algorithm;
 
-    public JwtTokenProvider(@Value("${jwt.secret}") String secretKey,
-                      @Value("${jwt.tokenValidityMilliseconds}") long tokenValidityMilliseconds) {
+    public JwtTokenProvider(
+            @Value("${jwt.secret}") String secretKey,
+            @Value("${jwt.tokenValidityMilliseconds}") long tokenValidityMilliseconds)
+    {
         this.secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
         this.tokenValidityMilliseconds = tokenValidityMilliseconds;
         algorithm = Algorithm.HMAC256(this.secretKey);
