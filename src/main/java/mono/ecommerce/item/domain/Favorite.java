@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mono.ecommerce.item.controller.FavoriteDto;
 import mono.ecommerce.user.domain.User;
 
 @Entity
@@ -22,4 +23,8 @@ public class Favorite {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "item_id", nullable = false)
     private Item item;
+
+    public FavoriteDto toDto(){
+        return new FavoriteDto(item.getName(), item.getPrice(), item.getQuantity());
+    }
 }
