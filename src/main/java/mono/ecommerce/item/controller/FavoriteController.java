@@ -27,4 +27,10 @@ public class FavoriteController {
         return favoriteService.registerFavorite(userDetails.getId(), itemId);
     }
 
+    @DeleteMapping("/{itemId}")
+    public String deleteFavorite(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable("itemId") Long itemId) {
+        Long deletedId = favoriteService.deleteFavorite(userDetails.getId(), itemId);
+        return "favorite " + deletedId +  " deleted";
+    }
+
 }

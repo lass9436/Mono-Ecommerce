@@ -36,4 +36,9 @@ public class FavoriteService {
         final Favorite favorite = new Favorite(user, item);
         return favoriteRepository.save(favorite).toDto();
     }
+
+    @Transactional
+    public Long deleteFavorite(Long userId, Long itemId) {
+        return favoriteRepository.deleteByUserIdAndItemId(userId, itemId);
+    }
 }
