@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mono.ecommerce.item.domain.Item;
+import mono.ecommerce.order.controller.OrderItemDto;
 
 @Entity
 @Getter
@@ -28,4 +29,8 @@ public class OrderItem {
 
     @Column(nullable = false)
     private Long totalPrice;
+
+    public OrderItemDto toDto() {
+        return new OrderItemDto(item.getName(), quantity, totalPrice);
+    }
 }

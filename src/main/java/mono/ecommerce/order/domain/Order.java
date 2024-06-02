@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import mono.ecommerce.order.controller.OrderDto;
+import mono.ecommerce.order.controller.OrderItemDto;
 import mono.ecommerce.user.domain.User;
 
 import java.time.LocalDateTime;
@@ -31,4 +33,10 @@ public class Order {
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
     private List<OrderItem> orderItems = new ArrayList<>();
+
+    public OrderDto toDto(){
+        List<OrderItemDto> orderItemDtoList = orderItems.stream().map(OrderItem::toDto).toList();
+        Long orderPrice = orderItemDtoList.stream().mapToLong(OrderItemDto::getTotalPrice).sum();
+        return new OrderDto(orderDate, status.name(), orderItemDtoList, orderPrice);
+    }
 }
