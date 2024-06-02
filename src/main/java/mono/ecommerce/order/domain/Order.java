@@ -37,7 +37,7 @@ public class Order {
     public OrderDto toDto(){
         List<OrderItemDto> orderItemDtoList = orderItems.stream().map(OrderItem::toDto).toList();
         Long orderPrice = orderItemDtoList.stream().mapToLong(OrderItemDto::getTotalPrice).sum();
-        return new OrderDto(orderDate, status.getValue(), orderItemDtoList, orderPrice);
+        return new OrderDto(id, orderDate, status.getValue(), orderItemDtoList, orderPrice);
     }
 
     public void updateStatus(OrderStatus orderStatus) {

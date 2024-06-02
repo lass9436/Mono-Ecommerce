@@ -25,6 +25,6 @@ public class Item {
     private Long quantity;
 
     public ItemDto toDto(){
-        return new ItemDto(name, price, quantity);
+        return new ItemDto(id, name, price, quantity);
     }
 }
