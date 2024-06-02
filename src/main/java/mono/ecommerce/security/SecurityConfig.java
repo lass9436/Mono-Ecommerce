@@ -36,6 +36,7 @@ public class SecurityConfig{
                 request
                         .requestMatchers("/h2-console/**").permitAll()
                         .requestMatchers("/login", "/logout").permitAll()
+                        .requestMatchers("/item/**").permitAll()
                         .requestMatchers("/user/**").hasRole("USER")
                         .anyRequest().permitAll();
             })
