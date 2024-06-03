@@ -1,6 +1,5 @@
 package mono.ecommerce.order.controller;
 
-import mono.ecommerce.order.domain.OrderStatus;
 import mono.ecommerce.order.service.OrderService;
 import mono.ecommerce.security.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
