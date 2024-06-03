@@ -32,4 +32,9 @@ public class OrderController {
     public OrderDto updateOrderStatus(@AuthenticationPrincipal UserDetailsImpl userDetails, @PathVariable("orderId") Long orderId, @RequestBody OrderUpdate orderUpdate) {
         return orderService.updateOrderStatus(userDetails.getId(), orderId, orderUpdate);
     }
+
+    @PostMapping
+    public OrderDto registerOrder(@AuthenticationPrincipal UserDetailsImpl userDetails, @RequestBody OrderRegister orderRegister) {
+        return orderService.registerOrder(userDetails.getId(), orderRegister);
+    }
 }

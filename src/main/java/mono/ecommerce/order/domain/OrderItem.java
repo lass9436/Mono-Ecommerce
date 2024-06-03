@@ -30,6 +30,13 @@ public class OrderItem {
     @Column(nullable = false)
     private Long totalPrice;
 
+    public OrderItem(Order order, Item item) {
+        this.order = order;
+        this.item = item;
+        this.quantity = item.getOrderQuantity();
+        this.totalPrice = item.getOrderPrice();
+    }
+
     public OrderItemDto toDto() {
         return new OrderItemDto(item.getName(), quantity, totalPrice);
     }

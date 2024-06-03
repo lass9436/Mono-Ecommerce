@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import mono.ecommerce.order.controller.OrderDto;
 import mono.ecommerce.order.controller.OrderItemDto;
+import mono.ecommerce.order.controller.OrderRegister;
 import mono.ecommerce.user.domain.User;
 
 import java.time.LocalDateTime;
@@ -32,7 +33,17 @@ public class Order {
     private OrderStatus status;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
-    private List<OrderItem> orderItems = new ArrayList<>();
+    private final List<OrderItem> orderItems = new ArrayList<>();
+
+    public Order(User user){
+        this.user = user;
+        this.status = OrderStatus.ORDERED;
+        this.orderDate = LocalDateTime.now();
+    }
+
+    public void addOrderItems(List<OrderItem> orderItems) {
+        this.orderItems.addAll(orderItems);
+    }
 
     public OrderDto toDto(){
         List<OrderItemDto> orderItemDtoList = orderItems.stream().map(OrderItem::toDto).toList();

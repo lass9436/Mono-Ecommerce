@@ -34,4 +34,9 @@ public class User {
     public void charge(Long point) {
         this.point += point;
     }
+
+    public void payment(Long point) {
+        if (this.point < point) throw new IllegalArgumentException("insufficient point");
+        this.point -= point;
+    }
 }

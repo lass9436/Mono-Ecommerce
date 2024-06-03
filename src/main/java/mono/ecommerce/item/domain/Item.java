@@ -24,7 +24,20 @@ public class Item {
     @Column(nullable = false)
     private Long quantity;
 
+    @Transient
+    private Long orderQuantity;
+
+    @Transient
+    private Long orderPrice;
+
     public ItemDto toDto(){
         return new ItemDto(id, name, price, quantity);
+    }
+
+    public void order(Long quantity){
+        if(this.quantity - quantity < 0) throw new IllegalArgumentException("out of stock");
+        this.quantity -= quantity;
+        this.orderQuantity = quantity;
+        this.orderPrice = quantity * price;
     }
 }
