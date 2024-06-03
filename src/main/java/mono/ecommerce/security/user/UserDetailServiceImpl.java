@@ -1,5 +1,6 @@
-package mono.ecommerce.security;
+package mono.ecommerce.security.user;
 
+import mono.ecommerce.security.controller.SignRequest;
 import mono.ecommerce.user.domain.User;
 import mono.ecommerce.user.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;

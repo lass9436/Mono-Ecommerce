@@ -4,7 +4,7 @@ import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import mono.ecommerce.security.SignRequest;
+import mono.ecommerce.security.controller.SignRequest;
 
 @Entity
 @Table(name = "users")

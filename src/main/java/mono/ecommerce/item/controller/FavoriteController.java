@@ -1,7 +1,7 @@
 package mono.ecommerce.item.controller;
 
 import mono.ecommerce.item.service.FavoriteService;
-import mono.ecommerce.security.UserDetailsImpl;
+import mono.ecommerce.security.user.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 

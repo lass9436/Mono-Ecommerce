@@ -1,7 +1,7 @@
 package mono.ecommerce.order.controller;
 
 import mono.ecommerce.order.service.OrderService;
-import mono.ecommerce.security.UserDetailsImpl;
+import mono.ecommerce.security.user.UserDetailsImpl;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 

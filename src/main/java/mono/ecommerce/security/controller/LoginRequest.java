@@ -1,4 +1,4 @@
-package mono.ecommerce.security;
+package mono.ecommerce.security.controller;
 
 import lombok.Getter;
 import lombok.Setter;

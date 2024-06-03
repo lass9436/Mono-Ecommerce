@@ -1,4 +1,4 @@
-package mono.ecommerce.security;
+package mono.ecommerce.security.redis;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;

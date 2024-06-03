@@ -1,4 +1,4 @@
-package mono.ecommerce.security;
+package mono.ecommerce.security.redis;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

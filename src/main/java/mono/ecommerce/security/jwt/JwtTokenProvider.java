@@ -1,4 +1,4 @@
-package mono.ecommerce.security;
+package mono.ecommerce.security.jwt;
 
 
 import com.auth0.jwt.JWT;
