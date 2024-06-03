@@ -28,21 +28,17 @@ public class SecurityConfig{
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .headers(headers -> {
-                headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin);
-            })
+            .headers(headers -> headers.frameOptions(HeadersConfigurer.FrameOptionsConfig::sameOrigin))
             .formLogin(AbstractHttpConfigurer::disable)
             .csrf(AbstractHttpConfigurer::disable)
             .sessionManagement(AbstractHttpConfigurer::disable)
             .logout(AbstractHttpConfigurer::disable)
-            .authorizeHttpRequests(request -> {
-                request
-                        .requestMatchers("/h2-console/**").permitAll()
-                        .requestMatchers("/login", "/logout").permitAll()
-                        .requestMatchers("/item/**").permitAll()
-                        .requestMatchers("/user/**", "/favorite/**", "/order/**").hasRole("USER")
-                        .anyRequest().permitAll();
-            })
+            .authorizeHttpRequests(request -> request
+                    .requestMatchers("/h2-console/**").permitAll()
+                    .requestMatchers("/login", "/logout").permitAll()
+                    .requestMatchers("/item/**").permitAll()
+                    .requestMatchers("/user/**", "/favorite/**", "/order/**").hasRole("USER")
+                    .anyRequest().permitAll())
             .addFilterBefore(new JwtAuthenticationFilter(jwtTokenProvider, userDetailsService, redisService), UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
